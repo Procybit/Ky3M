@@ -15,3 +15,4 @@ modbundles are not yet implemented, releases are extremely unstable.
 
 - #1 Fix:
   - Enhanced extractor's mcmod.info finder
+- Activated general exceptions, arising when the user communicates incorrectly with the CLI
