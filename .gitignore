@@ -1,0 +1,6 @@
+# virtual envs
+/.venv/
+/venv/
+
+# distribution
+/dist/
