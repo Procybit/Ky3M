@@ -1,3 +1,13 @@
+[](https://github.com/Procybit/Ky3M)
+
+[![GitHub Repo stars](https://img.shields.io/github/stars/Procybit/Ky3M?style=social)](https://github.com/Procybit/Ky3M)
+
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/ky3m?style=for-the-badge)](https://pypi.org)
+
+[![GitHub](https://img.shields.io/github/license/Procybit/Ky3M?style=for-the-badge)](LICENSE)
+
+[![GitHub contributors](https://img.shields.io/github/contributors/Procybit/Ky3M?style=for-the-badge)](https://github.com/Procybit/Ky3M) [![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Procybit/Ky3M?style=for-the-badge)](https://github.com/Procybit/Ky3M) [![GitHub issues](https://img.shields.io/github/issues-raw/Procybit/Ky3M?style=for-the-badge)](https://github.com/Procybit/Ky3M)
+
 # Ky3M
 
 Minecraft Mod Manager by Leon "Procybit" Shepelev
