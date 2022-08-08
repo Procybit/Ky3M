@@ -6,7 +6,9 @@ Minecraft Mod Manager by Leon "Procybit" Shepelev
 
 Via pip or any other PyPI package manager:
 
-`python -m pip install ky3m`
+```
+python -m pip install ky3m
+```
 
 **Make sure you have Python 3.10 or above installed!**
 
@@ -14,7 +16,9 @@ Via pip or any other PyPI package manager:
 
 Via terminal:
 
-`python -m ky3m`
+```
+python -m ky3m
+```
 
 ## Using the CLI
 
