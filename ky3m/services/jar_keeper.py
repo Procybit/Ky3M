@@ -11,6 +11,7 @@ rel_dir = '\\saved_jars'
 
 # get saved ids
 def get_ids(_rep: Report) -> dict:
+    # TODO exception if no mods saved
     ids = pcl.recall('saved_ids', _rep)
     if ids:
         _rep.record(f'Got saved ids! length: {len(ids)}', __name__)
