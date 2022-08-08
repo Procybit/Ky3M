@@ -16,7 +16,9 @@ Minecraft Mod Manager by Leon "Procybit" Shepelev
 
 Via pip or any other PyPI package manager:
 
-`python -m pip install ky3m`
+```
+python -m pip install ky3m
+```
 
 **Make sure you have Python 3.10 or above installed!**
 
@@ -24,7 +26,9 @@ Via pip or any other PyPI package manager:
 
 Via terminal:
 
-`python -m ky3m`
+```
+python -m ky3m
+```
 
 ## Using the CLI
 
@@ -57,29 +61,29 @@ Log intercepted!
 
 ## Methods
 
-**INSPECT**
+### INSPECT
 
 Outputs all .jar files names from Minecraft mods folder.
 
 ASSIGNS A UNIQUE ID TO EACH NEWLY OUTPUT FILE.
 
-**PEER** *id*
+### PEER `id`
 
 Outputs information about certain .jar file in Minecraft mods folder.
 
-Uses *id*  assigned by *INSPECT*
+Uses `id`  assigned by *INSPECT*
 
-**EXPEL** *id*
+### EXPEL `id`
 
 Permanently deletes certain .jar file from Minecraft mods folder.
 
-Uses *id* assigned by *INSPECT*
+Uses `id` assigned by *INSPECT*
 
-**ADOPT** *id*
+### ADOPT `id`
 
 Copies certain .jar file from Minecraft mods folder to local library.
 
-Uses *id* assigned by *INSPECT*
+Uses `id` assigned by *INSPECT*
 
 CAN INTERRUPT CLI AND REQUEST NAME OF SAVED FILE IF NEEDED.
 
@@ -87,21 +91,21 @@ DOESN'T DELETE CERTAIN FILE.
 
 ASSIGNS A UNIQUE ID TO EACH SAVED FILE.
 
-**ADOPTS**
+### ADOPTS
 
 Outputs all saved .jar files names from local library.
 
-**RELEASE** *id*
+### RELEASE `id`
 
 Copies certain .jar file from local library to Minecraft mods folder.
 
-Uses *id* assigned by *ADOPT*
+Uses `id` assigned by *ADOPT*
 
-**PUNISH** *id*
+### PUNISH `id`
 
 Permanently deletes certain .jar file from local library.
 
-Uses *id* assigned by *ADOPT*
+Uses `id` assigned by *ADOPT*
 
 ## License
 This project follows MIT license. (see [LICENSE](LICENSE))
