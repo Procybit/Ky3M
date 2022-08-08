@@ -26,12 +26,12 @@ def use_method(_input_data):
             print(report)
 
     # TODO restrict exception handling to methods level only
-    # except AttributeError:
-    #     print(f'Method {m_name} does not exist!')
+    except AttributeError:
+        print(f'Method {m_name} does not exist!')
     except NotImplementedError:
         print(f'Method {m_name} is not implemented!')
-    # except ValueError:
-    #     print(f'Method {m_name} accepts a different specification configuration!')
+    except ValueError:
+        print(f'Method {m_name} accepts a different specification configuration!')
 
     return report
 
