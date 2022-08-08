@@ -13,10 +13,11 @@ def extract_info(jar: bytes, _rep: Report) -> MCMod | None:
     with zipfile.ZipFile(io.BytesIO(jar)) as zf:
         name_list = zf.namelist()
 
-        if 'mcmod.info' in name_list:  # MC Forge (1.13]
+        mcmod_info_path = ''.join(name if 'mcmod.info' in name else '' for name in name_list)
+        if mcmod_info_path:  # MC Forge (1.13]
             loader = 'Forge'
 
-            data = json.loads(zf.read('mcmod.info'))
+            data = json.loads(zf.read(mcmod_info_path))
             _rep.record('extracted mcmod.info!', __name__)
 
             # format differences possible
