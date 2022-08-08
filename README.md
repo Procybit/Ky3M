@@ -2,7 +2,7 @@
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/Procybit/Ky3M?style=social)](https://github.com/Procybit/Ky3M)
 
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/ky3m?style=for-the-badge)](https://pypi.org)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/ky3m?style=for-the-badge)](https://pypi.org/project/ky3m/)
 
 [![GitHub](https://img.shields.io/github/license/Procybit/Ky3M?style=for-the-badge)](LICENSE)
 
