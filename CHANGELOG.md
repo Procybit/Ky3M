@@ -2,17 +2,18 @@
 
 These are the changes made to the Ky3M project from the beginning:
 
-## Basic Functionality Phase
+## [v0.1.0](https://github.com/Procybit/Ky3M/releases/tag/v0.1.0) - 2022-08-08
 
-The development phase, in which only basic functionality is available to the user,
-modbundles are not yet implemented, releases are extremely unstable.
+### Added
 
-### v0.1.0
+- First official project release
 
-- Initial
+## v0.1.1 - UNRELEASED
 
-### v0.1.1
+### Fixed
 
-- #1 Fix:
-  - Enhanced extractor's mcmod.info finder
-- Activated general exceptions, arising when the user communicates incorrectly with the CLI
+- Enhanced extractor's mcmod.info finder (https://github.com/Procybit/Ky3M/issues/1 fix)
+
+### Changed
+
+- Enabled generic exceptions handling (previously disabled) that occur when the user interacts incorrectly with the CLI.
