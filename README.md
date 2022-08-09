@@ -4,9 +4,9 @@
 
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/ky3m?style=for-the-badge)](https://pypi.org/project/ky3m/)
 
-[![GitHub](https://img.shields.io/github/license/Procybit/Ky3M?style=for-the-badge)](LICENSE)
+[![GitHub](https://img.shields.io/github/license/Procybit/Ky3M?style=for-the-badge)](https://github.com/Procybit/Ky3M/blob/master/LICENSE)
 
-[![GitHub contributors](https://img.shields.io/github/contributors/Procybit/Ky3M?style=for-the-badge)](https://github.com/Procybit/Ky3M) [![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Procybit/Ky3M?style=for-the-badge)](https://github.com/Procybit/Ky3M) [![GitHub issues](https://img.shields.io/github/issues-raw/Procybit/Ky3M?style=for-the-badge)](https://github.com/Procybit/Ky3M)
+[![GitHub contributors](https://img.shields.io/github/contributors/Procybit/Ky3M?style=for-the-badge)](https://github.com/Procybit/Ky3M/blob/master/CONTRIBUTORS.md) [![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Procybit/Ky3M?style=for-the-badge)](https://github.com/Procybit/Ky3M/commits/) [![GitHub issues](https://img.shields.io/github/issues-raw/Procybit/Ky3M?style=for-the-badge)](https://github.com/Procybit/Ky3M/issues)
 
 # Ky3M
 
