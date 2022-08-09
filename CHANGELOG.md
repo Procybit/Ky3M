@@ -18,3 +18,4 @@ These are the changes made to the Ky3M project from the beginning:
 ### Changed
 
 - Enabled generic exceptions handling (previously disabled) that occur when the user interacts incorrectly with the CLI.
+- RELEASE now generates more unique filenames (using gmttime)

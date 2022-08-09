@@ -1,3 +1,5 @@
+import time
+
 from .report import Report
 from .services import *
 
@@ -149,19 +151,13 @@ def release(spec):
 
     # main part
     jar, status = jar_keeper.load(saved_id, rep)
-    if status and saved_id in ids:  # id check
-        try:
-            name = extractor.extract_info(jar, rep).modid  # use extracted modid as filename
-        except AttributeError:  # if .jar is not mod
-            name = ids[saved_id].casefold().replace(' ', '').replace('.', '')  # use saved name as filename
+    if status and saved_id in ids:  # saved id check
+        name = time.strftime('%Y%m%d%H%M%S', time.gmtime()) + extractor.extract_info(jar, rep).modid  # generate uniq id
         status = mm_storage.insert_jar(jar, name, rep)  # insert
-        if status:  # name free check
+        if status:
             rep.result = f'Requested .jar released! (filename: {name}.jar)'
-        else:
-            name += (str_base(hash(jar + name.encode('UTF-8')), latin_36_human))  # generate another "unique" name
-            # TODO generate more unique released .jar names
-            mm_storage.insert_jar(jar, name, rep)  # insert
-            rep.result = f'Requested .jar released! (filename: {name}.jar)'
+        else:  # logically should not happen, but you never know
+            rep.result = f'Requested .jar could not be released!'
     else:
         rep.result = f'Bad saved id! ({saved_id.upper()})'
 
