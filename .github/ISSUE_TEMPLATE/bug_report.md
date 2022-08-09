@@ -26,7 +26,7 @@ If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. Linux Mint]
- - Version [e.g. 0.1.1]
+ - Release: [e.g. v0.1.1]
 
 **Additional context**
 Add any other context about the problem here.
