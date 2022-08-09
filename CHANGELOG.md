@@ -13,6 +13,7 @@ These are the changes made to the Ky3M project from the beginning:
 ### Fixed
 
 - Enhanced extractor's mcmod.info finder (https://github.com/Procybit/Ky3M/issues/1 fix)
+- Fixed error when ADOPTS couldn't find saved .jar files
 
 ### Changed
 
