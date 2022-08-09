@@ -14,10 +14,16 @@ Minecraft Mod Manager by Leon "Procybit" Shepelev
 
 ## Installing
 
-Via pip or any other PyPI package manager:
+Via pip:
 
 ```
-python -m pip install ky3m
+pip install ky3m
+```
+
+Also you can upgrade to the latest version:
+
+```
+pip install ky3m --upgrade
 ```
 
 **Make sure you have Python 3.10 or above installed!**
