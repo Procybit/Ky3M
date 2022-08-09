@@ -13,7 +13,7 @@ def list_jars(_rep: Report) -> dict:
     jars = {}
     for file in os.listdir(paths.mods_path):
         if file.endswith('.jar'):
-            jars[str_base(id(file), latin_36_human)] = file  # TODO Add optional digital ID capability
+            jars[str_base(id(file), latin_36_human)] = file
 
     if len(jars) > 1:
         # simplify INSPECT mod keys
