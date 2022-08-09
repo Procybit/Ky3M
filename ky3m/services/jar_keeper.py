@@ -11,7 +11,6 @@ rel_dir = '\\saved_jars'
 
 # get saved ids
 def get_ids(_rep: Report) -> dict:
-    # TODO exception if no mods saved
     ids = pcl.recall('saved_ids', _rep)
     if ids:
         _rep.record(f'Got saved ids! length: {len(ids)}', __name__)
@@ -23,11 +22,10 @@ def get_ids(_rep: Report) -> dict:
 
 # simplify ids (for human)
 def get_ids_simplified(ids: list, _rep: Report) -> dict:
-    # equate length
-    max_len = max(len(i) for i in ids)
-    ids = list(i.rjust(max_len, 'U') for i in ids)
-
     if len(ids) > 1:
+        # equate length
+        max_len = max(len(i) for i in ids)
+        ids = list(i.rjust(max_len, 'U') for i in ids)
         ids_o = ids.copy()
         ids = dict(zip(ids, ids))
         ids_c = ids.copy()
