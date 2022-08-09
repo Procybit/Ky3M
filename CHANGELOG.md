@@ -8,7 +8,7 @@ These are the changes made to the Ky3M project from the beginning:
 
 - First official project release
 
-## [v0.1.1](https://github.com/Procybit/Ky3M/releases/tag/v0.1.1) (UNRELEASED)
+## [v0.1.1](https://github.com/Procybit/Ky3M/releases/tag/v0.1.1) (2022-08-09)
 
 ### Fixed
 
