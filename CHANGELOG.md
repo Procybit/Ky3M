@@ -2,13 +2,13 @@
 
 These are the changes made to the Ky3M project from the beginning:
 
-## [v0.1.0](https://github.com/Procybit/Ky3M/releases/tag/v0.1.0) (2022-08-08)
+## [Release 0.1.0](https://github.com/Procybit/Ky3M/releases/tag/v0.1.0) (2022-08-08)
 
 ### Added
 
 - First official project release
 
-## [v0.1.1](https://github.com/Procybit/Ky3M/releases/tag/v0.1.1) (2022-08-09)
+## [Release 0.1.1](https://github.com/Procybit/Ky3M/releases/tag/v0.1.1) (2022-08-09)
 
 ### Fixed
 
@@ -18,4 +18,10 @@ These are the changes made to the Ky3M project from the beginning:
 ### Changed
 
 - Enabled generic exceptions handling (previously disabled) that occur when the user interacts incorrectly with the CLI.
-- RELEASE now generates more unique filenames (using gmttime)
+- RELEASE method now generates more unique filenames (using gmttime)
+
+## [Release 0.1.2](https://github.com/Procybit/Ky3m/releases/tag/v0.1.2) (UNRELEASED)
+
+### Added
+
+- Redesigned generic exceptions handling
