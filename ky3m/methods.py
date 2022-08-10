@@ -17,7 +17,7 @@ def _sep_spec(_spec: tuple, names: tuple[str] | tuple) -> dict:
 
 
 def inspect(spec) -> Report:
-    () = spec  # no specification
+    spec = _sep_spec(spec, ())  # no specification
 
     rep = Report('INSPECT')
     rep.record('INSPECT started!', __name__)
@@ -36,9 +36,9 @@ def inspect(spec) -> Report:
 
 
 def peer(spec) -> Report:
-    listed_id, = spec
+    spec = _sep_spec(spec, ('listed_id',))
 
-    listed_id = listed_id.lower()  # listed id stored and used in lowercase
+    listed_id = spec['listed_id'].lower()  # listed id stored and used in lowercase
 
     rep = Report('PEER')
     rep.record('PEER started!', __name__)
@@ -70,9 +70,9 @@ Minecraft compatible version: {mod.dependencies[0].version} {mod.loader}"""
 
 
 def expel(spec):
-    listed_id, = spec
+    spec = _sep_spec(spec, ('listed_id',))
 
-    listed_id = listed_id.lower()  # listed id stored and used in lowercase
+    listed_id = spec['listed_id'].lower()  # listed id stored and used in lowercase
 
     rep = Report('EXPEL')
     rep.record('EXPEL started!', __name__)
@@ -92,9 +92,9 @@ def expel(spec):
 
 
 def adopt(spec):
-    listed_id, = spec
+    spec = _sep_spec(spec, ('listed_id',))
 
-    listed_id = listed_id.lower()  # listed id stored and used in lowercase
+    listed_id = spec['listed_id'].lower()  # listed id stored and used in lowercase
 
     rep = Report('ADOPT')
     rep.record('ADOPT started!', __name__)
@@ -122,7 +122,7 @@ def adopt(spec):
 
 
 def adopts(spec):
-    () = spec
+    spec = _sep_spec(spec, ())  # no specification
 
     rep = Report('ADOPTS')
     rep.record('ADOPTS started!', __name__)
@@ -145,9 +145,9 @@ def adopts(spec):
 
 
 def release(spec):
-    saved_id, = spec
+    spec = _sep_spec(spec, ('saved_id',))
 
-    saved_id = saved_id.lower()
+    saved_id = spec['saved_id'].lower()  # saved id stored and used in lowercase
 
     rep = Report('RELEASE')
     rep.record('RELEASE started!', __name__)
@@ -178,9 +178,9 @@ def release(spec):
 
 
 def punish(spec):
-    saved_id, = spec
+    spec = _sep_spec(spec, ('saved_id',))
 
-    saved_id = saved_id.lower()
+    saved_id = spec['saved_id'].lower()  # saved id stored and used in lowercase
 
     rep = Report('PUNISH')
     rep.record('PUNISH started!', __name__)
