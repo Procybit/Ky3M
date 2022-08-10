@@ -1,3 +1,4 @@
+import ky3m.methods
 from ky3m import methods
 from ky3m.common.latin import *
 
@@ -26,6 +27,8 @@ def use_method(_input_data):
                 print(report)
         else:
             print(f'Method {m_name} does not exist!')
+    except ky3m.methods.InvalidSpecification:
+        print(f'Method {m_name} accepts a different specification format!')
     except NotImplementedError:
         print(f'Method {m_name} is not implemented!')
 
