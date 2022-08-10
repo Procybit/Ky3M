@@ -3,8 +3,17 @@ import time
 from .report import Report
 from .services import *
 
-from .common.str_base import str_base
-from .common.latin import latin_36_human
+
+class InvalidSpecification(Exception):
+    pass
+
+
+# used to get named specification dictionary from tuple, using auto-exception if needed
+def _sep_spec(_spec: tuple, names: tuple[str] | tuple) -> dict:
+    if len(_spec) == len(names):
+        return dict(zip(names, _spec))
+    else:
+        raise InvalidSpecification()
 
 
 def inspect(spec) -> Report:
