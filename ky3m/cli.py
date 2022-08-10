@@ -1,3 +1,4 @@
+import ky3m.methods
 from ky3m import methods
 from ky3m.common.latin import *
 
@@ -16,20 +17,18 @@ def use_method(_input_data):
     except IndexError:  # if no spec. provided
         m_spec = []
 
-    #
     try:
-        m = getattr(methods, m_name.casefold())
-        report = m(tuple(m_spec))  # method call, report.Report() returned
-        if report is None:
-            print('Nothing to report!')
+        if m_name.casefold() in dir(methods):  # check for method existence
+            m = getattr(methods, m_name.casefold())
+            report = m(tuple(m_spec))  # method call, report.Report class returned
+            if report is None:
+                print('Nothing to report!')
+            else:
+                print(report)
         else:
-            print(report)
-
-    # TODO restrict exception handling to methods level only
-    except AttributeError:
-        print(f'Method {m_name} does not exist!')
-    except ValueError:
-        print(f'Method {m_name} accepts a different specification configuration!')
+            print(f'Method {m_name} does not exist!')
+    except ky3m.methods.InvalidSpecification:
+        print(f'Method {m_name} accepts a different specification format!')
     except NotImplementedError:
         print(f'Method {m_name} is not implemented!')
 
