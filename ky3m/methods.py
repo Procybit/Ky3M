@@ -69,7 +69,7 @@ Minecraft compatible version: {mod.dependencies[0].version} {mod.loader}"""
     # raise NotImplementedError('PEER is not implemented!')
 
 
-def expel(spec):
+def expel(spec) -> Report:
     spec = _sep_spec(spec, ('listed_id',))
 
     listed_id = spec['listed_id'].lower()  # listed id stored and used in lowercase
@@ -91,7 +91,7 @@ def expel(spec):
     # raise NotImplementedError('EXPEL is not implemented!')
 
 
-def adopt(spec):
+def adopt(spec) -> Report:
     spec = _sep_spec(spec, ('listed_id',))
 
     listed_id = spec['listed_id'].lower()  # listed id stored and used in lowercase
@@ -121,7 +121,7 @@ def adopt(spec):
     # raise NotImplementedError('ADOPT is not implemented!')
 
 
-def adopts(spec):
+def adopts(spec) -> Report:
     spec = _sep_spec(spec, ())  # no specification
 
     rep = Report('ADOPTS')
@@ -144,7 +144,7 @@ def adopts(spec):
     # raise NotImplementedError('ADOPTS is not implemented!')
 
 
-def release(spec):
+def release(spec) -> Report:
     spec = _sep_spec(spec, ('saved_id',))
 
     saved_id = spec['saved_id'].lower()  # saved id stored and used in lowercase
@@ -177,7 +177,7 @@ def release(spec):
     # raise NotImplementedError('RELEASE is not implemented!')
 
 
-def punish(spec):
+def punish(spec) -> Report:
     spec = _sep_spec(spec, ('saved_id',))
 
     saved_id = spec['saved_id'].lower()  # saved id stored and used in lowercase
@@ -199,6 +199,8 @@ def punish(spec):
         rep.result = 'Requested .jar unsaved!'
     else:
         rep.result = f'Bad saved id! ({saved_id.upper()})'
+
+    rep.record('PUNISH ended!', __name__)
 
     return rep
 
