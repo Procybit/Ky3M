@@ -403,4 +403,51 @@ def detach(spec):
 
 
 def apply(spec):
-    raise NotImplementedError('APPLY is not implemented!')
+    spec = _sep_spec(spec, ('id',))
+
+    rep = Report('APPLY')
+    rep.record('APPLY started!', __name__)
+    rep.record(f'APPLY spec: {" ".join(spec)}', __name__)
+
+    # convert bundle id
+    try:
+        spec['id'] = uuid.UUID(spec['id']).hex
+    except ValueError:
+        rep.result = 'Wrong ID type!'
+        rep.record('APPLY ended!', __name__)
+        return rep
+
+    # load saved bundle data
+    bundle_obj = pickler.recall(spec['id'], rep, '\\bundles')
+    if bundle_obj is None:
+        rep.result = f'Bad bundle id! ({spec["id"]})'
+        rep.record('APPLY ended!', __name__)
+        return rep
+
+    released = []  # for output
+    for bind_id in bundle_obj:  # releasing
+
+        # main part
+        jar, status = jar_keeper.load(bind_id, rep)
+        if status:  # saved id check
+            name = time.strftime('%Y%m%d%H%M%S', time.gmtime()) + extractor.extract_info(jar,
+                                                                                         rep).modid  # generate uniq id
+            mm_storage.insert_jar(jar, name, rep)  # insert
+            released.append(f'{bind_id.upper()} released! ({name})')
+        else:
+            released.append(f'{bind_id.upper()} could not be released! (binded .jar file not found)')
+    released = '\n'.join(released)
+
+    # load saved bundles ids
+    bundle_ids_saved = pickler.recall('bundle_ids', rep)
+    if not bundle_ids_saved:  # if found nothing saved
+        bundle_ids_saved = {}
+
+    # get bundle name
+    name = bundle_ids_saved[spec['id']]
+
+    rep.result = f'{released}\n{name} applied successfully!'
+    rep.record('APPLY ended!', __name__)
+    return rep
+
+    # raise NotImplementedError('APPLY is not implemented!')
