@@ -255,6 +255,38 @@ def bundles(spec):
     # raise NotImplementedError('BUNDLES is not implemented!')
 
 
+def burst(spec):
+    spec = _sep_spec(spec, ('id',))
+
+    rep = Report('BURST')
+    rep.record('BURST started!', __name__)
+    rep.record(f'BURST spec: {" ".join(spec)}', __name__)
+
+    try:
+        spec['id'] = uuid.UUID(spec['id']).hex
+    except ValueError:
+        rep.result = 'Wrong ID type!'
+        return rep
+
+    # load saved bundles ids
+    bundle_ids_saved = pickler.recall('bundle_ids', rep)
+    if not bundle_ids_saved:  # if found nothing saved
+        bundle_ids_saved = {}
+
+    name = bundle_ids_saved.pop(spec['id'], None)
+    if name:
+        pickler.remember(bundle_ids_saved, 'bundle_ids', rep)
+        rep.result = f'Bundle {name} bursted!'
+    else:
+        rep.result = f'Unable to burst bundle! (not found)'
+
+    rep.record('BURST ended!', __name__)
+
+    return rep
+
+    # raise NotImplementedError('BURST is not implemented!')
+
+
 def bind(spec):
     raise NotImplementedError('BIND is not implemented!')
 
@@ -265,7 +297,3 @@ def detach(spec):
 
 def apply(spec):
     raise NotImplementedError('APPLY is not implemented!')
-
-
-def burst(spec):
-    raise NotImplementedError('BURST is not implemented!')
