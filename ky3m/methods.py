@@ -1,4 +1,5 @@
 import time
+import uuid
 
 from .report import Report
 from .services import *
@@ -206,7 +207,31 @@ def punish(spec):
 
 
 def bundle(spec):
-    raise NotImplementedError('BUNDLE is not implemented!')
+    spec = _sep_spec(spec, ('name',))
+
+    rep = Report('BUNDLE')
+    rep.record('BUNDLE started!', __name__)
+    rep.record(f'BUNDLE spec: {" ".join(spec)}', __name__)
+
+    # save initial bundle data
+    bundle_id = uuid.uuid4().hex
+    bundle_obj = []  # BINDed mods ids will be here
+    pickler.remember(bundle_obj, bundle_id, rep, '\\bundles')
+
+    # save bundle id
+    bundle_ids_saved = pickler.recall('bundle_ids', rep)
+    if not bundle_ids_saved:  # if found nothing saved
+        bundle_ids_saved = {}
+    bundle_ids_saved[bundle_id] = spec['name']
+    pickler.remember(bundle_ids_saved, 'bundle_ids', rep)
+
+    rep.result = f'Bundle created successfully! (id: {str(uuid.UUID(bundle_id)).upper()})'
+
+    rep.record('BUNDLE ended!', __name__)
+
+    return rep
+
+    # raise NotImplementedError('BUNDLE is not implemented!')
 
 
 def bind(spec):
