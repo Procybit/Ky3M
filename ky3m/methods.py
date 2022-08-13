@@ -288,7 +288,53 @@ def burst(spec):
 
 
 def bind(spec):
-    raise NotImplementedError('BIND is not implemented!')
+    spec = _sep_spec(spec, ('id', 'saved_id',))
+
+    saved_id = spec['saved_id'].lower()  # saved id stored and used in lowercase
+
+    rep = Report('BIND')
+    rep.record('BIND started!', __name__)
+    rep.record(f'BIND spec: {" ".join(spec)}', __name__)
+
+    # convert bundle id
+    try:
+        spec['id'] = uuid.UUID(spec['id']).hex
+    except ValueError:
+        rep.result = 'Wrong ID type!'
+        rep.record('BIND ended!', __name__)
+        return rep
+
+    # convert saved id
+    ids = jar_keeper.get_ids(rep)
+    ids = jar_keeper.get_ids_simplified(list(ids.keys()), rep)
+    saved_id = jar_keeper.get_true_id(ids, saved_id, rep)
+    if not saved_id:
+        rep.result = f'Bad saved id! ({saved_id.upper()})'
+        rep.record('BIND ended!', __name__)
+        return rep
+
+    # load saved bundle data
+    bundle_obj = pickler.recall(spec['id'], rep, '\\bundles')
+    if bundle_obj is None:
+        rep.result = f'Bad bundle id! ({spec["id"]})'
+        rep.record('BIND ended!', __name__)
+        return rep
+
+    # add id
+    bundle_obj.append(saved_id)
+    pickler.remember(bundle_obj, spec['id'], rep, '\\bundles')
+
+    # load saved bundles ids
+    bundle_ids_saved = pickler.recall('bundle_ids', rep)
+    if not bundle_ids_saved:  # if found nothing saved
+        bundle_ids_saved = {}
+
+    rep.result = f'Saved id {saved_id.upper()} binded to bundle {bundle_ids_saved[spec["id"]]}!'
+
+    rep.record('BIND ended!', __name__)
+    return rep
+
+    # raise NotImplementedError('BIND is not implemented!')
 
 
 def detach(spec):
