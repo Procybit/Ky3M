@@ -357,7 +357,46 @@ def bind(spec):
 
 
 def detach(spec):
-    raise NotImplementedError('DETACH is not implemented!')
+    spec = _sep_spec(spec, ('id', 'bind_id'))
+
+    rep = Report('DETACH')
+    rep.record('DETACH started!', __name__)
+    rep.record(f'DETACH spec: {" ".join(spec)}', __name__)
+
+    # convert bundle id
+    try:
+        spec['id'] = uuid.UUID(spec['id']).hex
+    except ValueError:
+        rep.result = 'Wrong ID type!'
+        rep.record('DETACH ended!', __name__)
+        return rep
+
+    # load saved bundles ids
+    bundle_ids_saved = pickler.recall('bundle_ids', rep)
+    if not bundle_ids_saved:  # if found nothing saved
+        bundle_ids_saved = {}
+
+    try:
+        name = bundle_ids_saved[spec['id']]
+
+        # load saved bundle data
+        bundle_obj = pickler.recall(spec['id'], rep, '\\bundles')
+
+        # update saved bundle data
+        bundle_obj.remove(spec['bind_id'].casefold())
+
+        # save new bundle data
+        pickler.remember(bundle_obj, spec['id'], rep, '\\bundles')
+
+        rep.result = f'Detached {str(uuid.UUID(spec["id"])).upper()} from {name}!'
+
+    except (KeyError, ValueError):
+        rep.result = 'Unable to detach!'
+
+    rep.record('DETACH ended!', __name__)
+    return rep
+
+    # raise NotImplementedError('DETACH is not implemented!')
 
 
 def apply(spec):
