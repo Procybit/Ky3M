@@ -207,29 +207,48 @@ def punish(spec):
 
 
 def bundle(spec):
-    spec = _sep_spec(spec, ('name',))
+    spec = _sep_spec(spec, ('name_or_id',))
 
     rep = Report('BUNDLE')
     rep.record('BUNDLE started!', __name__)
     rep.record(f'BUNDLE spec: {" ".join(spec)}', __name__)
 
-    # save initial bundle data
-    bundle_id = uuid.uuid4().hex
-    bundle_obj = []  # BINDed mods ids will be here
-    pickler.remember(bundle_obj, bundle_id, rep, '\\bundles')
+    try:
+        bundle_id = uuid.UUID(spec['name_or_id']).hex
+        bundle_obj = pickler.recall(bundle_id, rep, '\\bundles')
 
-    # save bundle id
-    bundle_ids_saved = pickler.recall('bundle_ids', rep)
-    if not bundle_ids_saved:  # if found nothing saved
-        bundle_ids_saved = {}
-    bundle_ids_saved[bundle_id] = spec['name']
-    pickler.remember(bundle_ids_saved, 'bundle_ids', rep)
+        # load saved bundles ids
+        bundle_ids_saved = pickler.recall('bundle_ids', rep)
+        if not bundle_ids_saved:  # if found nothing saved
+            bundle_ids_saved = {}
 
-    rep.result = f'Bundle created successfully! (id: {str(uuid.UUID(bundle_id)).upper()})'
+        # for f-string
+        _lf = '\n'
+        _tab = '\t'
 
-    rep.record('BUNDLE ended!', __name__)
+        rep.result = f'Name: {bundle_ids_saved[bundle_id]}\n' \
+                     f'ID: {str(uuid.UUID(bundle_id)).upper()}\n' \
+                     f'Binded IDs:\n' \
+                     f'{_lf.join(f"{_tab}{bind_id.upper()}" for bind_id in bundle_obj)}'
+        rep.record('BUNDLE ended!', __name__)
+        return rep
 
-    return rep
+    except ValueError:  # create new
+        # save initial bundle data
+        bundle_id = uuid.uuid4().hex
+        bundle_obj = []  # BINDed mods ids will be here
+        pickler.remember(bundle_obj, bundle_id, rep, '\\bundles')
+
+        # save bundle id
+        bundle_ids_saved = pickler.recall('bundle_ids', rep)
+        if not bundle_ids_saved:  # if found nothing saved
+            bundle_ids_saved = {}
+        bundle_ids_saved[bundle_id] = spec['name_or_id']
+        pickler.remember(bundle_ids_saved, 'bundle_ids', rep)
+
+        rep.result = f'Bundle created successfully! (id: {str(uuid.UUID(bundle_id)).upper()})'
+        rep.record('BUNDLE ended!', __name__)
+        return rep
 
     # raise NotImplementedError('BUNDLE is not implemented!')
 
