@@ -234,6 +234,10 @@ def bundle(spec):
     # raise NotImplementedError('BUNDLE is not implemented!')
 
 
+def bundles(spec):
+    raise NotImplementedError('BUNDLES is not implemented!')
+
+
 def bind(spec):
     raise NotImplementedError('BIND is not implemented!')
 
