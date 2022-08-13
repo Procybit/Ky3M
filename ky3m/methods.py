@@ -222,6 +222,9 @@ def bundle(spec):
         if not bundle_ids_saved:  # if found nothing saved
             bundle_ids_saved = {}
 
+        # load saved names
+        names = jar_keeper.get_ids(rep)
+
         # for f-string
         _lf = '\n'
         _tab = '\t'
@@ -229,7 +232,7 @@ def bundle(spec):
         rep.result = f'Name: {bundle_ids_saved[bundle_id]}\n' \
                      f'ID: {str(uuid.UUID(bundle_id)).upper()}\n' \
                      f'Binded IDs:\n' \
-                     f'{_lf.join(f"{_tab}{bind_id.upper()}" for bind_id in bundle_obj)}'
+                     f'{_lf.join(f"{_tab}{bind_id.upper()}: {names[bind_id]}" for bind_id in bundle_obj)}'
         rep.record('BUNDLE ended!', __name__)
         return rep
 
