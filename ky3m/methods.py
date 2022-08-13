@@ -266,6 +266,7 @@ def burst(spec):
         spec['id'] = uuid.UUID(spec['id']).hex
     except ValueError:
         rep.result = 'Wrong ID type!'
+        rep.record('BURST ended!', __name__)
         return rep
 
     # load saved bundles ids
@@ -281,7 +282,6 @@ def burst(spec):
         rep.result = f'Unable to burst bundle! (not found)'
 
     rep.record('BURST ended!', __name__)
-
     return rep
 
     # raise NotImplementedError('BURST is not implemented!')
