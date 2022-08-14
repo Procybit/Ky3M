@@ -229,10 +229,22 @@ def bundle(spec):
         _lf = '\n'
         _tab = '\t'
 
+        # for output
+        binds = []
+        for _bind_id in bundle_obj:
+            try:
+                binds.append(f'{_tab}{_bind_id.upper()}: {names[_bind_id]}')
+            except KeyError:
+                binds.append(f'{_tab}{_bind_id.upper()}: UNKNOWN')
+        if binds:
+            binds = '\n'.join(binds)
+        else:  # if no binds outputted
+            binds = 'Nothing here...'
+
         rep.result = f'Name: {bundle_ids_saved[bundle_id]}\n' \
                      f'ID: {str(uuid.UUID(bundle_id)).upper()}\n' \
                      f'Binded IDs:\n' \
-                     f'{_lf.join(f"{_tab}{bind_id.upper()}: {names[bind_id]}" for bind_id in bundle_obj)}'
+                     f'{binds}'
         rep.record('BUNDLE ended!', __name__)
         return rep
 
