@@ -22,6 +22,10 @@ These are the changes made to the Ky3M project from the beginning:
 
 ## [Release 0.1.2](https://github.com/Procybit/Ky3m/releases/tag/v0.1.2) (UNRELEASED)
 
+### Fixed
+
+- Updated RELEASE'ed .jar filename generator (https://github.com/Procybit/Ky3M/issues/3 fix)
+
 ### Added
 
 - Redesigned generic exceptions handling
