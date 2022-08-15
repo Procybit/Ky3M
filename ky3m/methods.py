@@ -1,3 +1,4 @@
+import re
 import time
 
 from .report import Report
@@ -161,7 +162,11 @@ def release(spec) -> Report:
     # main part
     jar, status = jar_keeper.load(saved_id, rep)
     if status and saved_id in ids:  # saved id check
-        name = time.strftime('%Y%m%d%H%M%S', time.gmtime()) + extractor.extract_info(jar, rep).modid  # generate uniq id
+        # generate unique id
+        try:
+            name = time.strftime('%Y%m%d%H%M%S', time.gmtime()) + extractor.extract_info(jar, rep).modid
+        except AttributeError:  # for non-mods
+            name = time.strftime('%Y%m%d%H%M%S', time.gmtime()) + re.sub('[^A-Za-z0–9]', '', ids[saved_id]).casefold()
         status = mm_storage.insert_jar(jar, name, rep)  # insert
         if status:
             rep.result = f'Requested .jar released! (filename: {name}.jar)'
