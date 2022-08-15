@@ -20,7 +20,7 @@ These are the changes made to the Ky3M project from the beginning:
 - Enabled generic exceptions handling (previously disabled) that occur when the user interacts incorrectly with the CLI.
 - RELEASE method now generates more unique filenames (using gmttime)
 
-## [Release 0.1.2](https://github.com/Procybit/Ky3m/releases/tag/v0.1.2) (UNRELEASED)
+## [Release 0.1.2](https://github.com/Procybit/Ky3m/releases/tag/v0.1.2) (2022-08-15)
 
 ### Fixed
 
