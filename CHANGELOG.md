@@ -2,7 +2,11 @@
 
 These are the changes made to the Ky3M project from the beginning:
 
-## [Release 0.2.0](https://github.com/Procybit/Ky3m/releases/tag/v0.2.0) (XXXX-XX-XX) - General Functionality Phase
+## [Release 0.2.1](https://github.com/Procybit/Ky3m/releases/tag/v0.2.1) (XXXX-XX-XX)
+
+Nothing here...
+
+## [Release 0.2.0](https://github.com/Procybit/Ky3m/releases/tag/v0.2.0) (2022-08-16) - General Functionality Phase
 
 Transition to the General Functionality Phase.
 
