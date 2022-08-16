@@ -442,8 +442,11 @@ def apply(spec):
         # main part
         jar, status = jar_keeper.load(bind_id, rep)
         if status:  # saved id check
-            name = time.strftime('%Y%m%d%H%M%S', time.gmtime()) + extractor.extract_info(jar,
-                                                                                         rep).modid  # generate uniq id
+            # generate unique id
+            try:
+                name = time.strftime('%Y%m%d%H%M%S', time.gmtime()) + extractor.extract_info(jar, rep).modid
+            except AttributeError:  # for non-mods
+                name = time.strftime('%Y%m%d%H%M%S', time.gmtime()) + bind_id.casefold()
             mm_storage.insert_jar(jar, name, rep)  # insert
             released.append(f'{bind_id.upper()} released! ({name})')
         else:
