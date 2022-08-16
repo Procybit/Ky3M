@@ -229,22 +229,25 @@ def bundle(spec):
         _lf = '\n'
         _tab = '\t'
 
-        # for output
-        binds = []
-        for _bind_id in bundle_obj:
-            try:
-                binds.append(f'{_tab}{_bind_id.upper()}: {names[_bind_id]}')
-            except KeyError:
-                binds.append(f'{_tab}{_bind_id.upper()}: UNKNOWN')
-        if binds:
-            binds = '\n'.join(binds)
-        else:  # if no binds outputted
-            binds = '\tNothing here...'
+        try:
+            # for output
+            binds = []
+            for _bind_id in bundle_obj:
+                try:
+                    binds.append(f'{_tab}{_bind_id.upper()}: {names[_bind_id]}')
+                except KeyError:
+                    binds.append(f'{_tab}{_bind_id.upper()}: UNKNOWN')
+            if binds:
+                binds = '\n'.join(binds)
+            else:  # if no binds outputted
+                binds = '\tNothing here...'
 
-        rep.result = f'Name: {bundle_ids_saved[bundle_id]}\n' \
-                     f'ID: {str(uuid.UUID(bundle_id)).upper()}\n' \
-                     f'Binded IDs:\n' \
-                     f'{binds}'
+            rep.result = f'Name: {bundle_ids_saved[bundle_id]}\n' \
+                         f'ID: {str(uuid.UUID(bundle_id)).upper()}\n' \
+                         f'Binded IDs:\n' \
+                         f'{binds}'
+        except TypeError:
+            rep.result = f'Could not find bundle with ID specified!'
         rep.record('BUNDLE ended!', __name__)
         return rep
 
