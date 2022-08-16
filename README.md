@@ -20,7 +20,7 @@ Via pip:
 pip install ky3m
 ```
 
-Also you can upgrade to the latest version:
+You can also update to the latest version:
 
 ```
 pip install ky3m --upgrade
@@ -77,41 +77,93 @@ ASSIGNS A UNIQUE ID TO EACH NEWLY OUTPUT FILE.
 
 Outputs information about certain .jar file in Minecraft mods folder.
 
-Uses `id`  assigned by *INSPECT*
+Uses `id`  assigned by *INSPECT*.
 
 ### EXPEL `id`
 
 Permanently deletes certain .jar file from Minecraft mods folder.
 
-Uses `id` assigned by *INSPECT*
+Uses `id` assigned by *INSPECT*.
 
-### ADOPT `id`
+### ADOPT `saved_id`
 
 Copies certain .jar file from Minecraft mods folder to local library.
 
-Uses `id` assigned by *INSPECT*
+Uses `saved_id` assigned by *INSPECT*.
 
 CAN INTERRUPT CLI AND REQUEST NAME OF SAVED FILE IF NEEDED.
 
 DOESN'T DELETE CERTAIN FILE.
 
-ASSIGNS A UNIQUE ID TO EACH SAVED FILE.
+ASSIGNS A UNIQUE SAVED ID TO EACH SAVED FILE.
 
 ### ADOPTS
 
 Outputs all saved .jar files names from local library.
 
-### RELEASE `id`
+### RELEASE `saved_id`
 
 Copies certain .jar file from local library to Minecraft mods folder.
 
-Uses `id` assigned by *ADOPT*
+Uses `saved_id` assigned by *ADOPT*.
 
-### PUNISH `id`
+### PUNISH `saved_id`
 
 Permanently deletes certain .jar file from local library.
 
-Uses `id` assigned by *ADOPT*
+Uses `saved_id` assigned by *ADOPT*.
+
+### BUNDLE `name` | `bundle_id`
+
+*Note that | separates an alternates.*
+
+If `name` not found, creates new bundle (Ky3M modpack) and outputs created bundle's ID.
+
+Uses `name` that is any string.
+
+ASSIGNS A UNIQUE ID TO EACH CREATED BUNDLE.
+
+**ALTERNATE**
+
+If found bundle with specified `bundle_id`, outputs the bundle info.
+
+Uses `bundle_id` that is valid UUID (in any form).
+
+### BUNDLES
+
+Outputs all created bundles' IDs and names.
+
+### BURST `bundle_id`
+
+Permanently deletes certain bundle.
+
+Uses `bundle_id` assigned by *BUNDLE*.
+
+### BIND `bundle_id` `saved_id`
+
+Binds certain .jar to a certain bundle.
+
+Uses `bundle_id` assigned by *BUNDLE*.
+
+Uses `saved_id` assigned by *ADOPT*.
+
+ASSIGNS A BIND ID (BUNDLE LOCAL) BASED ON SAVED ID.
+
+### DETACH `bundle_id` `bind_id`
+
+Detached certain .jar from a certain bundle.
+
+Uses `bundle_id` assigned by *BUNDLE*.
+
+Uses `bind_id` assigned by *BIND*.
+
+### APPLY `bundle_id`
+
+Releases all binded to certain bundle .jar files (see *RELEASE*).
+
+Uses `bundle_id` assigned by *BUNDLE*.
+
+DOESN'T DELETE ANY FILES.
 
 ## License
-This project follows MIT license. (see [LICENSE](LICENSE))
+This project follows MIT license (see [LICENSE](LICENSE)).

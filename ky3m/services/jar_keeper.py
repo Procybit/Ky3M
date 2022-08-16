@@ -93,6 +93,7 @@ def load(saved_id: str, _rep: Report) -> tuple[bytes, bool]:
         return jar, True
     else:
         _rep.record(f'unable to load .jar! saved_id: {saved_id.upper()}', __name__)
+        return b'', False
 
 
 # delete saved jar
