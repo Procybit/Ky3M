@@ -239,7 +239,7 @@ def bundle(spec):
         if binds:
             binds = '\n'.join(binds)
         else:  # if no binds outputted
-            binds = 'Nothing here...'
+            binds = '\tNothing here...'
 
         rep.result = f'Name: {bundle_ids_saved[bundle_id]}\n' \
                      f'ID: {str(uuid.UUID(bundle_id)).upper()}\n' \
