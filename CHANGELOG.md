@@ -4,13 +4,14 @@ These are the changes made to the Ky3M project from the beginning:
 
 ## [Release 0.2.1](https://github.com/Procybit/Ky3m/releases/tag/v0.2.1) (XXXX-XX-XX)
 
+**PLEASE RE-ADOPT MODS WITH "${file.jarVersion}" VERSION IF YOU HAVE SUCHLIKE!**
+
 ### Fixed
 
 - Fixed BURST (did not delete bundles before)
-
 - Fixed DETACH output
-
-- Fixed Minecraft mod info extractor in "${file.jarVersion}" case. **PLEASE RE-ADOPT MODS WITH THIS VERSION IF YOU HAVE SUCHLIKE!**
+- Fixed Minecraft mod info extractor in "${file.jarVersion}" case.
+- Fixed BIND when entering invalid saved ID
 
 ## [Release 0.2.0](https://github.com/Procybit/Ky3m/releases/tag/v0.2.0) (2022-08-16) - General Functionality Phase
 

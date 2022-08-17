@@ -354,7 +354,7 @@ def bind(spec):
     ids = jar_keeper.get_ids_simplified(list(ids.keys()), rep)
     saved_id = jar_keeper.get_true_id(ids, saved_id, rep)
     if not saved_id:
-        rep.result = f'Bad saved id! ({saved_id.upper()})'
+        rep.result = f'Bad saved id! ({spec["saved_id"]})'
         rep.record('BIND ended!', __name__)
         return rep
 
