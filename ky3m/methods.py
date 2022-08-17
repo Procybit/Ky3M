@@ -62,7 +62,7 @@ Minecraft compatible version: {mod.dependencies[0].version} {mod.loader}"""
             rep.result = 'This .jar is not valid minecraft mod!'
 
     else:
-        rep.result = f'Bad listed id or wrong file format! ({listed_id})'
+        rep.result = f'Bad listed id or wrong file format! ({spec["listed_id"]})'
 
     rep.record('PEER ended!', __name__)
 
@@ -114,7 +114,7 @@ def adopt(spec) -> Report:
             rep)
         rep.result = f'Requested .jar saved! ID: {saved_id.upper()}'
     else:  # if .jar not found
-        rep.result = f'Bad listed id! ({listed_id.upper()})'
+        rep.result = f'Bad listed id! ({spec["listed_id"]})'
 
     rep.record('ADOPT ended!', __name__)
 
