@@ -159,6 +159,10 @@ def release(spec) -> Report:
     ids = jar_keeper.get_ids(rep)
     ids_s = jar_keeper.get_ids_simplified(list(ids.keys()), rep)
     saved_id = jar_keeper.get_true_id(ids_s, saved_id, rep)
+    if not saved_id:
+        rep.result = f'Bad saved id! ({spec["saved_id"]})'
+        rep.record('RELEASE ended!', __name__)
+        return rep
 
     # main part
     jar, status = jar_keeper.load(saved_id, rep)
@@ -174,7 +178,7 @@ def release(spec) -> Report:
         else:  # logically should not happen, but you never know
             rep.result = f'Requested .jar could not be released!'
     else:
-        rep.result = f'Bad saved id! ({saved_id.upper()})'
+        rep.result = f'Bad saved id! ({spec["saved_id"]})'
 
     rep.record('RELEASE ended!', __name__)
 
@@ -197,17 +201,18 @@ def punish(spec) -> Report:
     ids = jar_keeper.get_ids_simplified(list(ids.keys()), rep)
     saved_id = jar_keeper.get_true_id(ids, saved_id, rep)
     if not saved_id:
-        rep.result = f'Bad saved id! ({saved_id.upper()})'
+        rep.result = f'Bad saved id! ({spec["saved_id"]})'
+        rep.record('PUNISH ended!', __name__)
+        return rep
 
     status = jar_keeper.delete(saved_id, rep)  # delete
 
     if status:
         rep.result = 'Requested .jar unsaved!'
     else:
-        rep.result = f'Bad saved id! ({saved_id.upper()})'
+        rep.result = f'Bad saved id! ({spec["saved_id"]})'
 
     rep.record('PUNISH ended!', __name__)
-
     return rep
 
     # raise NotImplementedError('PUNISH is not implemented!')
