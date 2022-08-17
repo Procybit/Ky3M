@@ -8,10 +8,10 @@ These are the changes made to the Ky3M project from the beginning:
 
 ### Fixed
 
-- Fixed BURST (did not delete bundles before)
-- Fixed DETACH output
+- Fixed BURST (did not delete bundles before).
+- Fixed DETACH output.
 - Fixed Minecraft mod info extractor in "${file.jarVersion}" case.
-- Fixed BIND when entering invalid saved ID
+- Prevent NoneType error in BIND that occurs when you enter an invalid saved ID.
 
 ## [Release 0.2.0](https://github.com/Procybit/Ky3m/releases/tag/v0.2.0) (2022-08-16) - General Functionality Phase
 
@@ -25,24 +25,24 @@ The main goal of subsequent releases (up to release [0.3.0](https://github.com/P
 
 ### Fixed
 
-- Updated RELEASE'ed .jar filename generator (https://github.com/Procybit/Ky3M/issues/3 fix)
+- Updated RELEASE'ed .jar filename generator (https://github.com/Procybit/Ky3M/issues/3 fix).
 
 ### Added
 
-- Redesigned generic exceptions handling
+- Redesigned generic exceptions handling.
 
 ## [Release 0.1.1](https://github.com/Procybit/Ky3M/releases/tag/v0.1.1) (2022-08-09)
 
 ### Fixed
 
-- Enhanced extractor's mcmod.info finder (https://github.com/Procybit/Ky3M/issues/1 fix)
-- Fixed error when ADOPTS couldn't find saved .jar files
+- Enhanced extractor's mcmod.info finder (https://github.com/Procybit/Ky3M/issues/1 fix).
+- Fixed error when ADOPTS couldn't find saved .jar files.
 
 ### Changed
 
 - Enabled generic exceptions handling (previously disabled) that occur when the user interacts incorrectly with the CLI.
-- RELEASE method now generates more unique filenames (using gmttime)
+- RELEASE method now generates more unique filenames (using gmttime).
 
 ## [Release 0.1.0](https://github.com/Procybit/Ky3M/releases/tag/v0.1.0) (2022-08-08) - Basic Functionality Phase
 
-- First official project release
+First official project release.
