@@ -48,13 +48,19 @@ def extract_info(jar: bytes, _rep: Report) -> MCMod | None:
         elif 'META-INF/mods.toml' in name_list:  # MC Forge [1.14)
             loader = 'Forge'
 
-            # replace() below was used because toml.py doesn't properly handle /r
+            # replace() below was used because toml.py doesn't properly handle \r
             data = toml.loads(zf.read('META-INF/mods.toml').decode('UTF-8').replace('\r', ''))
             _rep.record('extracted mods.toml!', __name__)
 
             mod_id = data['mods'][0]['modId']
             name = data['mods'][0]['displayName']
             version = data['mods'][0]['version']
+            # ${file.jarVersion} case
+            # replace "${file.jarVersion}" with META-INF/MANIFEST.MF "Implementation-Version" field
+            version = version.replace('${file.jarVersion}',
+                                      list(line.removeprefix('Implementation-Version: ')
+                                           for line in zf.read('META-INF/MANIFEST.MF').decode('UTF-8').split('\r\n')
+                                           if line.startswith('Implementation-Version'))[0])
             description = data['mods'][0]['description']
 
             try:
