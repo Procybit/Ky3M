@@ -321,6 +321,7 @@ def burst(spec):
     name = bundle_ids_saved.pop(spec['id'], None)
     if name:
         pickler.remember(bundle_ids_saved, 'bundle_ids', rep)
+        pickler.forget(spec['id'], rep, '\\bundles')
         rep.result = f'Bundle {name} bursted!'
     else:
         rep.result = f'Unable to burst bundle! (not found)'
