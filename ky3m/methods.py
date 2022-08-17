@@ -413,7 +413,7 @@ def detach(spec):
         # save new bundle data
         pickler.remember(bundle_obj, spec['id'], rep, '\\bundles')
 
-        rep.result = f'Detached {str(uuid.UUID(spec["id"])).upper()} from {name}!'
+        rep.result = f'Detached {str(spec["bind_id"]).upper()} from {name}!'
 
     except (KeyError, ValueError):
         rep.result = 'Unable to detach!'
