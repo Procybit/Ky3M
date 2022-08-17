@@ -2,7 +2,11 @@
 
 These are the changes made to the Ky3M project from the beginning:
 
-## [Release 0.2.1](https://github.com/Procybit/Ky3m/releases/tag/v0.2.1) (XXXX-XX-XX)
+## [Release 0.2.2](https://github.com/Procybit/Ky3m/releases/tag/v0.2.2) (XXXX-XX-XX)
+
+Nothing here yet...
+
+## [Release 0.2.1](https://github.com/Procybit/Ky3m/releases/tag/v0.2.1) (2022-08-17) - v0.2.0 Important patches
 
 **PLEASE RE-ADOPT MODS WITH "${file.jarVersion}" VERSION IF YOU HAVE SUCHLIKE!**
 

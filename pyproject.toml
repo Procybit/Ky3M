@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ky3m"
-version = "0.2.0"
+version = "0.2.1"
 description = "Minecraft Mod Manager by Leon \"Procybit\" Shepelev"
 authors = ["Leon \"Procybit\" Shepelev <kyleusnaff@gmail.com>"]
 license = "MIT"
@@ -22,4 +22,4 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.urls]
-"Report a Bug!" = "https://github.com/Procybit/Ky3M/issues"
+"Report a bug!" = "https://github.com/Procybit/Ky3M/issues"
