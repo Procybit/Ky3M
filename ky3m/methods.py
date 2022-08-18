@@ -230,9 +230,7 @@ def bundle(spec):
         bundle_obj = pickler.recall(bundle_id, rep, '\\bundles')
 
         # load saved bundles ids
-        bundle_ids_saved = pickler.recall('bundle_ids', rep)
-        if not bundle_ids_saved:  # if found nothing saved
-            bundle_ids_saved = {}
+        bundle_ids_saved = bundler.get_bundle_ids(rep)
 
         # load saved names
         names = jar_keeper.get_ids(rep)
@@ -264,19 +262,8 @@ def bundle(spec):
         return rep
 
     except ValueError:  # create new
-        # save initial bundle data
-        bundle_id = uuid.uuid4().hex
-        bundle_obj = []  # BINDed mods ids will be here
-        pickler.remember(bundle_obj, bundle_id, rep, '\\bundles')
-
-        # save bundle id
-        bundle_ids_saved = pickler.recall('bundle_ids', rep)
-        if not bundle_ids_saved:  # if found nothing saved
-            bundle_ids_saved = {}
-        bundle_ids_saved[bundle_id] = spec['name_or_id']
-        pickler.remember(bundle_ids_saved, 'bundle_ids', rep)
-
-        rep.result = f'Bundle created successfully! (id: {str(uuid.UUID(bundle_id)).upper()})'
+        bundle_id = bundler.create_bundle(spec['name_or_id'], rep)
+        rep.result = f'Bundle created successfully! (id: {str(bundle_id).upper()})'
         rep.record('BUNDLE ended!', __name__)
         return rep
 
@@ -290,7 +277,7 @@ def bundles(spec):
     rep.record('BUNDLES started!', __name__)
 
     # load saved bundles ids
-    bundle_ids_saved = pickler.recall('bundle_ids', rep)
+    bundle_ids_saved = bundler.get_bundle_ids(rep)
     if not bundle_ids_saved:  # if found nothing saved
         rep.result = 'Unable to list bundles!'
     else:
@@ -318,9 +305,7 @@ def burst(spec):
         return rep
 
     # load saved bundles ids
-    bundle_ids_saved = pickler.recall('bundle_ids', rep)
-    if not bundle_ids_saved:  # if found nothing saved
-        bundle_ids_saved = {}
+    bundle_ids_saved = bundler.get_bundle_ids(rep)
 
     name = bundle_ids_saved.pop(spec['id'], None)
     if name:
@@ -374,9 +359,7 @@ def bind(spec):
     pickler.remember(bundle_obj, spec['id'], rep, '\\bundles')
 
     # load saved bundles ids
-    bundle_ids_saved = pickler.recall('bundle_ids', rep)
-    if not bundle_ids_saved:  # if found nothing saved
-        bundle_ids_saved = {}
+    bundle_ids_saved = bundler.get_bundle_ids(rep)
 
     rep.result = f'Saved id {saved_id.upper()} binded to bundle {bundle_ids_saved[spec["id"]]}!'
 
@@ -402,9 +385,7 @@ def detach(spec):
         return rep
 
     # load saved bundles ids
-    bundle_ids_saved = pickler.recall('bundle_ids', rep)
-    if not bundle_ids_saved:  # if found nothing saved
-        bundle_ids_saved = {}
+    bundle_ids_saved = bundler.get_bundle_ids(rep)
 
     try:
         name = bundle_ids_saved[spec['id']]
@@ -469,9 +450,7 @@ def apply(spec):
     released = '\n'.join(released)
 
     # load saved bundles ids
-    bundle_ids_saved = pickler.recall('bundle_ids', rep)
-    if not bundle_ids_saved:  # if found nothing saved
-        bundle_ids_saved = {}
+    bundle_ids_saved = bundler.get_bundle_ids(rep)
 
     # get bundle name
     name = bundle_ids_saved[spec['id']]
