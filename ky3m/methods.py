@@ -226,8 +226,8 @@ def bundle(spec):
     rep.record(f'BUNDLE spec: {" ".join(spec)}', __name__)
 
     try:
-        bundle_id = uuid.UUID(spec['name_or_id']).hex
-        bundle_obj = pickler.recall(bundle_id, rep, '\\bundles')
+        bundle_id = uuid.UUID(spec['name_or_id'])
+        bundle_obj = bundler.get_bundle(bundle_id, rep)
 
         # load saved bundles ids
         bundle_ids_saved = bundler.get_bundle_ids(rep)
@@ -252,8 +252,8 @@ def bundle(spec):
             else:  # if no binds outputted
                 binds = '\tNothing here...'
 
-            rep.result = f'Name: {bundle_ids_saved[bundle_id]}\n' \
-                         f'ID: {str(uuid.UUID(bundle_id)).upper()}\n' \
+            rep.result = f'Name: {bundle_ids_saved[bundle_id.hex]}\n' \
+                         f'ID: {str(bundle_id).upper()}\n' \
                          f'Binded IDs:\n' \
                          f'{binds}'
         except TypeError:
@@ -332,7 +332,7 @@ def bind(spec):
 
     # convert bundle id
     try:
-        spec['id'] = uuid.UUID(spec['id']).hex
+        spec['id'] = uuid.UUID(spec['id'])
     except ValueError:
         rep.result = 'Wrong ID type!'
         rep.record('BIND ended!', __name__)
@@ -348,20 +348,20 @@ def bind(spec):
         return rep
 
     # load saved bundle data
-    bundle_obj = pickler.recall(spec['id'], rep, '\\bundles')
+    bundle_obj = bundler.get_bundle(spec['id'], rep)
     if bundle_obj is None:
-        rep.result = f'Bad bundle id! ({spec["id"]})'
+        rep.result = f'Bad bundle id! ({str(spec["id"]).upper()})'
         rep.record('BIND ended!', __name__)
         return rep
 
     # add id
     bundle_obj.append(saved_id)
-    pickler.remember(bundle_obj, spec['id'], rep, '\\bundles')
+    bundler.save_bundle(spec['id'], bundle_obj, rep)
 
     # load saved bundles ids
     bundle_ids_saved = bundler.get_bundle_ids(rep)
 
-    rep.result = f'Saved id {saved_id.upper()} binded to bundle {bundle_ids_saved[spec["id"]]}!'
+    rep.result = f'Saved id {saved_id.upper()} binded to bundle {bundle_ids_saved[spec["id"].hex]}!'
 
     rep.record('BIND ended!', __name__)
     return rep
@@ -378,7 +378,7 @@ def detach(spec):
 
     # convert bundle id
     try:
-        spec['id'] = uuid.UUID(spec['id']).hex
+        spec['id'] = uuid.UUID(spec['id'])
     except ValueError:
         rep.result = 'Wrong ID type!'
         rep.record('DETACH ended!', __name__)
@@ -388,16 +388,12 @@ def detach(spec):
     bundle_ids_saved = bundler.get_bundle_ids(rep)
 
     try:
-        name = bundle_ids_saved[spec['id']]
+        name = bundle_ids_saved[spec['id'].hex]
 
-        # load saved bundle data
-        bundle_obj = pickler.recall(spec['id'], rep, '\\bundles')
-
-        # update saved bundle data
+        # remove id
+        bundle_obj = bundler.get_bundle(spec['id'], rep)
         bundle_obj.remove(spec['bind_id'].casefold())
-
-        # save new bundle data
-        pickler.remember(bundle_obj, spec['id'], rep, '\\bundles')
+        bundler.save_bundle(spec['id'], bundle_obj, rep)
 
         rep.result = f'Detached {str(spec["bind_id"]).upper()} from {name}!'
 
@@ -419,16 +415,16 @@ def apply(spec):
 
     # convert bundle id
     try:
-        spec['id'] = uuid.UUID(spec['id']).hex
+        spec['id'] = uuid.UUID(spec['id'])
     except ValueError:
         rep.result = 'Wrong ID type!'
         rep.record('APPLY ended!', __name__)
         return rep
 
     # load saved bundle data
-    bundle_obj = pickler.recall(spec['id'], rep, '\\bundles')
+    bundle_obj = bundler.get_bundle(spec['id'], rep)
     if bundle_obj is None:
-        rep.result = f'Bad bundle id! ({spec["id"]})'
+        rep.result = f'Bad bundle id! ({str(spec["id"]).upper()})'
         rep.record('APPLY ended!', __name__)
         return rep
 
@@ -453,7 +449,7 @@ def apply(spec):
     bundle_ids_saved = bundler.get_bundle_ids(rep)
 
     # get bundle name
-    name = bundle_ids_saved[spec['id']]
+    name = bundle_ids_saved[spec['id'].hex]
 
     rep.result = f'{released}\n{name} applied successfully!'
     rep.record('APPLY ended!', __name__)

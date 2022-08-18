@@ -27,6 +27,29 @@ def create_bundle(name: str, _rep: Report) -> uuid.UUID:
     bundle_ids_saved = get_bundle_ids(_rep)
     bundle_ids_saved[bundle_id] = name
     pcl.remember(bundle_ids_saved, 'bundle_ids', _rep)
+
     _rep.record(f'bundle created! (name: {name}, id: {bundle_id})', __name__)
 
     return uuid.UUID(bundle_id)
+
+
+# get bundle
+def get_bundle(bundle_id: uuid.UUID, _rep: Report) -> list | None:
+    bundle_obj = pcl.recall(bundle_id.hex, _rep, '\\bundles')
+    if bundle_obj:
+        _rep.record(f'got bundle! ({bundle_id.hex})', __name__)
+    else:
+        _rep.record(f'could not get bundle! ({bundle_id.hex})', __name__)
+    return bundle_obj
+
+
+# get bundle
+def save_bundle(bundle_id: uuid.UUID, _bundle_obj: list, _rep) -> bool:
+    bundle_obj = get_bundle(bundle_id, _rep)
+    if bundle_obj is not None:
+        pcl.remember(_bundle_obj, bundle_id.hex, _rep, '\\bundles')
+        _rep.record(f'saved bundle! ({bundle_id.hex})', __name__)
+        return True
+    else:
+        _rep.record(f'could not saved bundle! ({bundle_id.hex})', __name__)
+        return False
