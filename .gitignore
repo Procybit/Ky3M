@@ -4,3 +4,7 @@
 
 # distribution
 /dist/
+
+#misc
+/.idea/dictionaries/
+/.idea/discord.xml
