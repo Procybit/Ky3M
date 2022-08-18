@@ -64,13 +64,11 @@ def insert_jar(jar: bytes, name: str, _rep: Report) -> bool:
 # delete certain .jar file from \.minecraft\mods folder
 def delete_jar(listed_id: str, _rep: Report) -> bool:
     listed_jars = pcl.recall('listed_ids', _rep)
-    name = listed_jars[listed_id]
     try:
+        name = listed_jars[listed_id]
         os.remove(paths.mods_path + '\\' + name)
         _rep.record(f'requested .jar removed! listed id: {listed_id}, name: {name}', __name__)
         return True
-    except FileNotFoundError:
-        _rep.record(f'unable to remove requested .jar! (file not fount) '
-                    f'name: listed id: {listed_id}, name: {name}', __name__)
+    except (FileNotFoundError, KeyError):
+        _rep.record(f'unable to remove requested .jar! listed id: {listed_id}', __name__)
         return False
-

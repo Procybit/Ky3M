@@ -34,6 +34,10 @@ def extract_info(jar: bytes, _rep: Report) -> MCMod | None:
                 version = data['modList'][0]['version']
                 description = data['modList'][0]['description']
 
+            # bad initial building mod case
+            mc_version = mc_version.replace('${mcversion}', 'Unknown Version')
+            version = version.replace('${version}', 'Unknown Version')
+
             # mod class initialization
             mod = MCMod(mod_id, mc_version)
             mod.name = name
@@ -48,13 +52,23 @@ def extract_info(jar: bytes, _rep: Report) -> MCMod | None:
         elif 'META-INF/mods.toml' in name_list:  # MC Forge [1.14)
             loader = 'Forge'
 
-            # replace() below was used because toml.py doesn't properly handle /r
+            # replace() below was used because toml.py doesn't properly handle \r
             data = toml.loads(zf.read('META-INF/mods.toml').decode('UTF-8').replace('\r', ''))
             _rep.record('extracted mods.toml!', __name__)
 
             mod_id = data['mods'][0]['modId']
             name = data['mods'][0]['displayName']
             version = data['mods'][0]['version']
+            # ${file.jarVersion} case
+            # replace "${file.jarVersion}" with META-INF/MANIFEST.MF "Implementation-Version" field
+            # otherwise leave "Unknown Version"
+            try:
+                version = version.replace('${file.jarVersion}',
+                                          list(line.removeprefix('Implementation-Version: ')
+                                               for line in zf.read('META-INF/MANIFEST.MF').decode('UTF-8').split('\r\n')
+                                               if line.startswith('Implementation-Version'))[0])
+            except IndexError:
+                version = 'Unknown Version'
             description = data['mods'][0]['description']
 
             try:
@@ -62,7 +76,7 @@ def extract_info(jar: bytes, _rep: Report) -> MCMod | None:
                                   for dep in data['dependencies'][mod_id]
                                   if dep['modId'] == 'minecraft')[0]  # str
             except KeyError:  # can happen at some cases
-                mc_version = 'unknown'
+                mc_version = 'Unknown Version'
 
             # mod class initialization
             mod = MCMod(mod_id, mc_version)

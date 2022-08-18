@@ -62,7 +62,7 @@ Minecraft compatible version: {mod.dependencies[0].version} {mod.loader}"""
             rep.result = 'This .jar is not valid minecraft mod!'
 
     else:
-        rep.result = f'Bad listed id or wrong file format! ({listed_id})'
+        rep.result = f'Bad listed id or wrong file format! ({spec["listed_id"]})'
 
     rep.record('PEER ended!', __name__)
 
@@ -114,7 +114,7 @@ def adopt(spec) -> Report:
             rep)
         rep.result = f'Requested .jar saved! ID: {saved_id.upper()}'
     else:  # if .jar not found
-        rep.result = f'Bad listed id! ({listed_id.upper()})'
+        rep.result = f'Bad listed id! ({spec["listed_id"]})'
 
     rep.record('ADOPT ended!', __name__)
 
@@ -159,6 +159,10 @@ def release(spec) -> Report:
     ids = jar_keeper.get_ids(rep)
     ids_s = jar_keeper.get_ids_simplified(list(ids.keys()), rep)
     saved_id = jar_keeper.get_true_id(ids_s, saved_id, rep)
+    if not saved_id:
+        rep.result = f'Bad saved id! ({spec["saved_id"]})'
+        rep.record('RELEASE ended!', __name__)
+        return rep
 
     # main part
     jar, status = jar_keeper.load(saved_id, rep)
@@ -174,7 +178,7 @@ def release(spec) -> Report:
         else:  # logically should not happen, but you never know
             rep.result = f'Requested .jar could not be released!'
     else:
-        rep.result = f'Bad saved id! ({saved_id.upper()})'
+        rep.result = f'Bad saved id! ({spec["saved_id"]})'
 
     rep.record('RELEASE ended!', __name__)
 
@@ -197,17 +201,18 @@ def punish(spec) -> Report:
     ids = jar_keeper.get_ids_simplified(list(ids.keys()), rep)
     saved_id = jar_keeper.get_true_id(ids, saved_id, rep)
     if not saved_id:
-        rep.result = f'Bad saved id! ({saved_id.upper()})'
+        rep.result = f'Bad saved id! ({spec["saved_id"]})'
+        rep.record('PUNISH ended!', __name__)
+        return rep
 
     status = jar_keeper.delete(saved_id, rep)  # delete
 
     if status:
         rep.result = 'Requested .jar unsaved!'
     else:
-        rep.result = f'Bad saved id! ({saved_id.upper()})'
+        rep.result = f'Bad saved id! ({spec["saved_id"]})'
 
     rep.record('PUNISH ended!', __name__)
-
     return rep
 
     # raise NotImplementedError('PUNISH is not implemented!')
@@ -287,7 +292,6 @@ def bundles(spec):
     # load saved bundles ids
     bundle_ids_saved = pickler.recall('bundle_ids', rep)
     if not bundle_ids_saved:  # if found nothing saved
-        bundle_ids_saved = {}
         rep.result = 'Unable to list bundles!'
     else:
         rep.result = '\n'.join(f'{str(uuid.UUID(key)).upper()}: {bundle_ids_saved[key]}' for key in bundle_ids_saved)
@@ -354,7 +358,7 @@ def bind(spec):
     ids = jar_keeper.get_ids_simplified(list(ids.keys()), rep)
     saved_id = jar_keeper.get_true_id(ids, saved_id, rep)
     if not saved_id:
-        rep.result = f'Bad saved id! ({saved_id.upper()})'
+        rep.result = f'Bad saved id! ({spec["saved_id"]})'
         rep.record('BIND ended!', __name__)
         return rep
 
@@ -459,7 +463,7 @@ def apply(spec):
             except AttributeError:  # for non-mods
                 name = time.strftime('%Y%m%d%H%M%S', time.gmtime()) + bind_id.casefold()
             mm_storage.insert_jar(jar, name, rep)  # insert
-            released.append(f'{bind_id.upper()} released! ({name})')
+            released.append(f'{bind_id.upper()} released! ({name}.jar)')
         else:
             released.append(f'{bind_id.upper()} could not be released! (binded .jar file not found)')
     released = '\n'.join(released)
