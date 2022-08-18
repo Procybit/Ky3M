@@ -463,7 +463,7 @@ def apply(spec):
             except AttributeError:  # for non-mods
                 name = time.strftime('%Y%m%d%H%M%S', time.gmtime()) + bind_id.casefold()
             mm_storage.insert_jar(jar, name, rep)  # insert
-            released.append(f'{bind_id.upper()} released! ({name})')
+            released.append(f'{bind_id.upper()} released! ({name}.jar)')
         else:
             released.append(f'{bind_id.upper()} could not be released! (binded .jar file not found)')
     released = '\n'.join(released)

@@ -8,6 +8,7 @@ These are the changes made to the Ky3M project from the beginning:
 
 - Recast unknown versions processing.
 - Add RELEASE, PUNISH, PEER and ADOPT bad saved ID handling.
+- Update APPLY output.
 
 ## [Release 0.2.1](https://github.com/Procybit/Ky3m/releases/tag/v0.2.1) (2022-08-17) - v0.2.0 Important patches
 
