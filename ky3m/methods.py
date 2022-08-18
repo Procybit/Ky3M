@@ -292,7 +292,6 @@ def bundles(spec):
     # load saved bundles ids
     bundle_ids_saved = pickler.recall('bundle_ids', rep)
     if not bundle_ids_saved:  # if found nothing saved
-        bundle_ids_saved = {}
         rep.result = 'Unable to list bundles!'
     else:
         rep.result = '\n'.join(f'{str(uuid.UUID(key)).upper()}: {bundle_ids_saved[key]}' for key in bundle_ids_saved)
