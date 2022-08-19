@@ -44,7 +44,7 @@ def peer(spec) -> Report:
 
     rep = Report('PEER')
     rep.record('PEER started!', __name__)
-    rep.record(f'PEER spec: {" ".join(spec)}', __name__)
+    rep.record(f'PEER spec: {", ".join(spec.values())}', __name__)
 
     jar = mm_storage.get_jar(listed_id, rep)  # request jar
 
@@ -78,7 +78,7 @@ def expel(spec) -> Report:
 
     rep = Report('EXPEL')
     rep.record('EXPEL started!', __name__)
-    rep.record(f'EXPEL spec: {" ".join(spec)}', __name__)
+    rep.record(f'EXPEL spec: {", ".join(spec.values())}', __name__)
 
     status = mm_storage.delete_jar(listed_id, rep)  # delete .jar
     if status:
@@ -100,7 +100,7 @@ def adopt(spec) -> Report:
 
     rep = Report('ADOPT')
     rep.record('ADOPT started!', __name__)
-    rep.record(f'ADOPT spec: {" ".join(spec)}', __name__)
+    rep.record(f'ADOPT spec: {", ".join(spec.values())}', __name__)
 
     jar = mm_storage.get_jar(listed_id, rep)  # request jar
 
@@ -128,7 +128,7 @@ def adopts(spec) -> Report:
 
     rep = Report('ADOPTS')
     rep.record('ADOPTS started!', __name__)
-    rep.record(f'ADOPTS spec: {" ".join(spec)}', __name__)
+    rep.record(f'ADOPTS spec: {", ".join(spec.values())}', __name__)
 
     # convert id
     ids = jar_keeper.get_ids(rep)
@@ -153,7 +153,7 @@ def release(spec) -> Report:
 
     rep = Report('RELEASE')
     rep.record('RELEASE started!', __name__)
-    rep.record(f'RELEASE spec: {" ".join(spec)}', __name__)
+    rep.record(f'RELEASE spec: {", ".join(spec.values())}', __name__)
 
     # convert id
     ids = jar_keeper.get_ids(rep)
@@ -194,7 +194,7 @@ def punish(spec) -> Report:
 
     rep = Report('PUNISH')
     rep.record('PUNISH started!', __name__)
-    rep.record(f'PUNISH spec: {" ".join(spec)}', __name__)
+    rep.record(f'PUNISH spec: {", ".join(spec.values())}', __name__)
 
     # convert id
     ids = jar_keeper.get_ids(rep)
@@ -223,7 +223,7 @@ def bundle(spec):
 
     rep = Report('BUNDLE')
     rep.record('BUNDLE started!', __name__)
-    rep.record(f'BUNDLE spec: {" ".join(spec)}', __name__)
+    rep.record(f'BUNDLE spec: {", ".join(spec.values())}', __name__)
 
     try:
         bundle_id = uuid.UUID(spec['name_or_id'])
@@ -295,7 +295,7 @@ def burst(spec):
 
     rep = Report('BURST')
     rep.record('BURST started!', __name__)
-    rep.record(f'BURST spec: {" ".join(spec)}', __name__)
+    rep.record(f'BURST spec: {", ".join(spec.values())}', __name__)
 
     try:
         spec['id'] = uuid.UUID(spec['id']).hex
@@ -328,7 +328,7 @@ def bind(spec):
 
     rep = Report('BIND')
     rep.record('BIND started!', __name__)
-    rep.record(f'BIND spec: {" ".join(spec)}', __name__)
+    rep.record(f'BIND spec: {", ".join(spec.values())}', __name__)
 
     # convert bundle id
     try:
@@ -374,7 +374,7 @@ def detach(spec):
 
     rep = Report('DETACH')
     rep.record('DETACH started!', __name__)
-    rep.record(f'DETACH spec: {" ".join(spec)}', __name__)
+    rep.record(f'DETACH spec: {", ".join(spec.values())}', __name__)
 
     # convert bundle id
     try:
@@ -411,7 +411,7 @@ def apply(spec):
 
     rep = Report('APPLY')
     rep.record('APPLY started!', __name__)
-    rep.record(f'APPLY spec: {" ".join(spec)}', __name__)
+    rep.record(f'APPLY spec: {", ".join(spec.values())}', __name__)
 
     # convert bundle id
     try:

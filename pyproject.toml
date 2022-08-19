@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ky3m"
-version = "0.2.2.dev1"
+version = "0.2.2"
 description = "Minecraft Mod Manager by Leon \"Procybit\" Shepelev"
 authors = ["Leon \"Procybit\" Shepelev <kyleusnaff@gmail.com>"]
 license = "MIT"
