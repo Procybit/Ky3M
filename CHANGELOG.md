@@ -2,6 +2,10 @@
 
 These are the changes made to the Ky3M project from the beginning:
 
+## [Release 0.2.3](https://github.com/Procybit/Ky3m/releases/tag/v0.2.3) (XXXX-XX-XX)
+
+Nothing here yet...
+
 ## [Release 0.2.2](https://github.com/Procybit/Ky3m/releases/tag/v0.2.2) (2022-08-19)
 
 ### Features
