@@ -4,7 +4,9 @@ These are the changes made to the Ky3M project from the beginning:
 
 ## [Release 0.2.3](https://github.com/Procybit/Ky3m/releases/tag/v0.2.3) (XXXX-XX-XX)
 
-Nothing here yet...
+### Features
+
+- Add help command.
 
 ## [Release 0.2.2](https://github.com/Procybit/Ky3m/releases/tag/v0.2.2) (2022-08-19)
 
@@ -13,8 +15,8 @@ Nothing here yet...
 - Recast unknown versions processing.
 - Add RELEASE, PUNISH, PEER and ADOPT bad saved ID handling.
 - Update APPLY output.
-- Refactor bundle-methods, some code is moved to the functions of the new module named "bundler.py".
-- Update logs' "spec" message
+- Refactor bundle-methods, some code is moved to the functions of the new module named "bundle.py".
+- Update logs' "spec" message.
 
 ## [Release 0.2.1](https://github.com/Procybit/Ky3m/releases/tag/v0.2.1) (2022-08-17) - v0.2.0 Important patches
 
