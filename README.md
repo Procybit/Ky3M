@@ -8,9 +8,9 @@
 
 [![GitHub contributors](https://img.shields.io/github/contributors/Procybit/Ky3M?style=for-the-badge)](https://github.com/Procybit/Ky3M/blob/master/CONTRIBUTORS.md) [![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Procybit/Ky3M?style=for-the-badge)](https://github.com/Procybit/Ky3M/commits/) [![GitHub issues](https://img.shields.io/github/issues-raw/Procybit/Ky3M?style=for-the-badge)](https://github.com/Procybit/Ky3M/issues)
 
-# Ky3M
+# Ky3M (development suspended)
 
-Minecraft Mod Manager by Leon "Procybit" Shepelev
+Minecraft Mod Manager by Procybit
 
 ## Installing
 
